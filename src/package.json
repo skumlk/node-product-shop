@@ -4,9 +4,9 @@
   "description": "",
   "scripts": {
     "dev-mon": "NODE_ENV=dev ts-node index.ts ",
-    "dev": "NODE_ENV=dev nodemon index.ts",
-    "test-only": "dotenv -e .env.test jest",
-    "test": "dotenv -e .env.test -- npx prisma migrate reset --force --preview-feature && prisma migrate deploy --preview-feature && dotenv -e .env.test jest",
+    "dev": "NODE_ENV=dev dotenv -e config/.dev.env nodemon index.ts",
+    "test-only": "dotenv -e config/.test.env jest",
+    "test": "dotenv -e config/.test.env prisma migrate reset --force --preview-feature && dotenv -e config/.test.env prisma migrate deploy --preview-feature && dotenv -e config/.test.env jest",
     "build": "NODE_ENV=prod tsc --project ./",
     "migrate": "npx prisma migrate dev",
     "lint": "eslint **/*.ts",
@@ -16,7 +16,9 @@
     "testEnvironment": "node",
     "coveragePathIgnorePatterns": [
       "/node_modules/"
-    ]
+    ],
+    "collectCoverage": true,
+    "coverageReporters": ["json", "html"]
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"

@@ -29,6 +29,14 @@ describe('Get a product', () => {
 
     expect(response.statusCode).toEqual(404)
   })
+
+  it('should get 400 error when passing invalid id', async () => {
+
+    const response = await request(app)
+      .get('/api/products/10test')
+
+    expect(response.statusCode).toEqual(400)
+  })
 })
 
 describe('Delete a product', () => {
@@ -66,9 +74,10 @@ describe('Upload a CSV file', () => {
       expect(response.statusCode).toEqual(200)
       
       response = await request(app)
-          .get('/api/products/1')
+          .get('/api/products')
       
       expect(response.statusCode).toEqual(200)
+      expect(response.body.data.length).toBe(6)
   })
 })
 

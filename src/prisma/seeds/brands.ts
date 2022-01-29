@@ -1,14 +1,14 @@
 export const brands = [
     {
         id: 1,
-        name: 'Microsoft',
+        name: 'microsoft',
     },
     {
         id: 2,
-        name: 'Google',
+        name: 'google',
     },
     {
         id: 3,
-        name: 'AWS',
+        name: 'aws',
     },
 ];
