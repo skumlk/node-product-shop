@@ -15,7 +15,7 @@ gqlFiles.forEach((file: string) => {
   });
 });
 
-var graphqlSchema = {
+var graphqlSchema : any = {
     schema: buildSchema(typedefs),
     rootValue: resolvers,
     graphiql: true,

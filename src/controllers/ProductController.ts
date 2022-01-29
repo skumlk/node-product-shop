@@ -1,8 +1,6 @@
 import "reflect-metadata";
-import * as express from "express";
 import Container from "typedi";
 import ProductService from "../services/ProductService";
-import * as httpHelpers from "../helpers/http";
 import { FileArray } from "express-fileupload";
 
 export default class ProductController {

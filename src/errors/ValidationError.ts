@@ -1,8 +1,6 @@
-export default class ValidationError {
+export default class ValidationError extends Error{
 
-    public readonly message: string;
-
-    constructor(error: string){
-        this.message = error;
+    constructor(message: string){
+        super(message)
     }
 }

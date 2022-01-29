@@ -3,11 +3,6 @@ import path from 'path';
 import dotenv from "dotenv"
 import * as _ from "lodash"
 
-const configOutput = dotenv.config({ path: path.resolve(__dirname, `./.${process.env.NODE_ENV}.env`)});
-
-if (configOutput.error)
-  throw new Error(".env file is missing")
-
 const required_config_variables: any = {//Safe to use any in here!
   SERVER_PORT: process.env.SERVER_PORT,
 }

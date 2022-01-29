@@ -1,3 +1,5 @@
-export default class UnauthorizedError{
-    constructor(public message: string){}
+export default class UnauthorizedError extends Error {
+    constructor(public message: string){
+        super(message)
+    }
 }

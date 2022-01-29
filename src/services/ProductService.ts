@@ -1,17 +1,14 @@
 import { Service } from "typedi";
 import { FileArray } from "express-fileupload";
 import { v4 as uuid } from "uuid";
+import { constants } from '../const/common';
+import { readCSV } from "../helpers/csv";
+import * as path from 'path';
 import ProductValidationService from "../validation/ProductValidationService";
 import ProductModelService from "../models/ProductModelService";
 import BrandModelService from "../models/BrandModelService";
 import IProductCsvRow from "../interfaces/IProductCsvRow";
 import IProduct from "../interfaces/IProduct";
-import { readCSV } from "../helpers/csv";
-import * as path from 'path';
-import { constants } from '../const/common';
-
-import * as ErrorCodes from "../errors/ErrorCodes"
-import BadRequestError from "../errors/BadRequestError";
 import NotFoundError from "../errors/NotFoundError";
 
 @Service()
@@ -49,7 +46,8 @@ export default class ProductService {
 
     async importProducts(files: FileArray | undefined) {
     
-        const { file: csvFile } = this.productValidationService.importProducts({ files })  // Validates and transform data, throw errors if any     
+        // Validates and transform data, throw errors if any     
+        const { file: csvFile } = this.productValidationService.importProducts({ files }) 
 
         const filePath = path.resolve(constants.UPLOAD_FOLDER_NAME, uuid()); 
         
@@ -77,7 +75,8 @@ export default class ProductService {
                     name: product.name,
                     slug: product.slug,
                     sku: product.sku,
-                    brandId: brand.id })
+                    brandId: brand.id,
+                })
             }
         }
         

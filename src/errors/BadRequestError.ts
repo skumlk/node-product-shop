@@ -1,3 +1,5 @@
-export default class BadRequestError{
-    constructor(public message: string){}
+export default class BadRequestError extends Error{
+    constructor(public message: string){
+        super(message)
+    }
 }

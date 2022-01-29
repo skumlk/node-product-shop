@@ -1,7 +1,5 @@
 import "reflect-metadata";
 import * as express from "express";
-import Container from "typedi";
-import ProductService from "../services/ProductService";
 import * as httpHelpers from "../helpers/http";
 import ProductController from "./ProductController"
 
@@ -24,7 +22,6 @@ export default class ProductControllerHttpWrapper {
             const data = await ProductController.getProduct(id)
             return httpHelpers.successResponse(res, data)
         } catch (e) {
-            console.log(e)
             next(e)
         }
     }
@@ -36,8 +33,6 @@ export default class ProductControllerHttpWrapper {
             const data = await ProductController.deleteProduct(id)
             return httpHelpers.successResponse(res, data)
         } catch (e) {
-            console.log(e)
-
             next(e)
         }
     }

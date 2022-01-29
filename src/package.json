@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev-mon": "NODE_ENV=dev ts-node index.ts ",
-    "dev": "NODE_ENV=dev dotenv -e config/.dev.env nodemon index.ts",
+    "dev-only": "dotenv -e config/.dev.env ts-node index.ts ",
+    "dev": "dotenv -e config/.dev.env nodemon index.ts",
     "test-only": "dotenv -e config/.test.env jest",
     "test": "dotenv -e config/.test.env prisma migrate reset --force --preview-feature && dotenv -e config/.test.env prisma migrate deploy --preview-feature && dotenv -e config/.test.env jest",
-    "build": "NODE_ENV=prod tsc --project ./",
+    "build": "dotenv -e config/.prod.env  tsc --project ./",
     "migrate": "npx prisma migrate dev",
     "lint": "eslint **/*.ts",
     "format": "eslint **/*.ts --fix"
@@ -18,7 +18,10 @@
       "/node_modules/"
     ],
     "collectCoverage": true,
-    "coverageReporters": ["json", "html"]
+    "coverageReporters": [
+      "json",
+      "html"
+    ]
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
@@ -46,7 +49,6 @@
     "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.10.1",
     "@typescript-eslint/parser": "^5.10.1",
-    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "db-migrate": "^0.11.13",
@@ -61,7 +63,6 @@
     "helmet": "^4.3.1",
     "hpp": "^0.2.3",
     "joi": "^17.3.0",
-    "jsonwebtoken": "^8.5.1",
     "limiter": "^1.1.5",
     "lodash": "^4.17.20",
     "morgan": "^1.10.0",
@@ -80,6 +81,7 @@
     "@types/jsonwebtoken": "^8.5.0",
     "@types/lodash": "^4.14.168",
     "@types/node": "^14.14.21",
+    "@types/sinon": "^10.0.9",
     "@types/supertest": "^2.0.10",
     "babel-eslint": "^10.1.0",
     "eslint": "^8.8.0",
@@ -88,6 +90,7 @@
     "jest": "^26.6.3",
     "prettier": "^2.5.1",
     "prisma": "^3.8.1",
+    "sinon": "^13.0.0",
     "supertest": "^6.2.2",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.5"

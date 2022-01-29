@@ -1,5 +1,5 @@
 import request from 'supertest'
-import { app, server } from '../index'
+import { app, server } from '../../index'
 
 describe('Get Products', () => {
   it('should get all products', async () => {
@@ -65,7 +65,7 @@ describe('Delete a product', () => {
 describe('Upload a CSV file', () => {
   it('should upload new products', async () => {
 
-      const filePath = `${__dirname}/test_files/data.csv`;
+      const filePath = `${__dirname}/../test_files/data.csv`;
 
       let response = await request(app)
         .post('/api/products/upload')
