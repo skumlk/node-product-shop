@@ -1,15 +1,20 @@
-
 import express from "express";
-const helmet = require("helmet")
-const cors = require("cors")
-const rateLimit = require('express-rate-limit');
+import helmet from "helmet";
+import cors from "cors";
+import hpp from "hpp";
+import bodyparser from "body-parser";
+import fileUpload from "express-fileupload";
+import { buildSchema } from "graphql";
+import { graphqlHTTP } from "express-graphql";
+import ProductController from "../controllers/ProductController";
+import graphqlSchema from "../graphql/index";
 const xss = require('xss-clean');
-const hpp = require('hpp');
-const bodyparser = require('body-parser')
-const fileUpload = require('express-fileupload');
+const rateLimit = require('express-rate-limit');
 
 export default async ({ expressApp } = { expressApp: express.application }) => {
-    
+
+    expressApp.use('/graphql', graphqlHTTP(graphqlSchema))
+
     expressApp.use(fileUpload({
         createParentPath: true,
         useTempFiles : true,

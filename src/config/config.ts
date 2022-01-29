@@ -17,7 +17,7 @@ const optional_config_variables = {
 
 function validateConfig() {
 
-  for (let key of Object.keys(required_config_variables)) {
+  for (const key of Object.keys(required_config_variables)) {
     if (_.isEmpty(required_config_variables[key]))
       throw new Error(`Env key ${key} is missing`)
   }

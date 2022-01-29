@@ -5,8 +5,4 @@ export default class ValidationError {
     constructor(error: string){
         this.message = error;
     }
-
-    getCode(){
-        
-    }
 }

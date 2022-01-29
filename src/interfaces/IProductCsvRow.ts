@@ -1,4 +1,4 @@
-export default interface IProductCsvRow {
+    export default interface IProductCsvRow {
     name: string,
     slug: string;
     sku: string;

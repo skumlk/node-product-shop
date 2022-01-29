@@ -1,0 +1,5 @@
+type Brand
+{
+    id: String
+    name: String
+}

@@ -28,42 +28,42 @@ export default class ProductService {
     }
 
     async getProduct(productId: string) {
-        var { id } = this.productValidationService.getProduct({ id: productId })  // Validates and transform data, throw errors if any     
+        const { id } = this.productValidationService.getProduct({ id: productId })  // Validates and transform data, throw errors if any     
         const product = await this.productModelService.get(id)
         return product;
     }
 
     async deleteProduct(productId: string) {
-        var { id } = this.productValidationService.deleteProduct({ id: productId })  // Validates and transform data, throw errors if any     
+        const { id } = this.productValidationService.deleteProduct({ id: productId })  // Validates and transform data, throw errors if any     
         const product = await this.productModelService.delete(id)
         return product;
     }
 
     async importProducts(files: FileArray | undefined) {
     
-        var { file: csvFile } = this.productValidationService.importProducts({ files })  // Validates and transform data, throw errors if any     
+        const { file: csvFile } = this.productValidationService.importProducts({ files })  // Validates and transform data, throw errors if any     
 
-        let filePath = path.resolve(constants.UPLOAD_FOLDER_NAME, uuid()); 
+        const filePath = path.resolve(constants.UPLOAD_FOLDER_NAME, uuid()); 
         
         csvFile.mv(filePath);
-        var products = await readCSV<IProductCsvRow>(filePath);
+        const products = await readCSV<IProductCsvRow>(filePath);
     
-        var brands = await this.brandModelService.list()
-        var brandNames = brands.map(x => x.name)
-        var allProductBrandNames = [...new Set(products.map(x => x.brand.toLowerCase()))]
-        var newBrands = allProductBrandNames
+        let brands = await this.brandModelService.list()
+        const brandNames = brands.map(x => x.name)
+        const allProductBrandNames = [...new Set(products.map(x => x.brand.toLowerCase()))]
+        const newBrands = allProductBrandNames
             .filter(x => !brandNames.includes(x))
             .map((name) => ({ name : name }))
         
         if (newBrands.length) {
-            var savedBrands = await this.brandModelService.createMany(newBrands);
+            const savedBrands = await this.brandModelService.createMany(newBrands);
             brands = brands.concat(savedBrands)
         }
 
-        var newProducts : IProduct[] = [];
+        const newProducts : IProduct[] = [];
         
-        for(var product of products) {
-            var brand = brands.find(y => y.name == product.brand)
+        for(const product of products) {
+            const brand = brands.find(y => y.name == product.brand)
             if (brand) {
                 newProducts.push({ 
                     name: product.name,

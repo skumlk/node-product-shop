@@ -3,7 +3,7 @@ import * as fs from 'fs';
 
 export function readCSV<T>(filePath: string){
 
-    var result : T[] = []
+    const result : T[] = []
 
     return new Promise<T[]>((resolve, reject) => { 
         fs.createReadStream(filePath)

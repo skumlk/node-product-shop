@@ -1,11 +1,11 @@
 import * as express from "express";
-import ProductController from "../controllers/ProductController";
+import ProductControllerHttpWrapper from "../controllers/ProductControllerHttpWrapper";
 
 const router = express.Router();
 
-router.get("/", ProductController.listProducts)
-router.get("/:id", ProductController.getProduct)
-router.delete("/:id", ProductController.deleteProduct)
-router.post("/upload", ProductController.importProducts)
+router.get("/", ProductControllerHttpWrapper.listProducts)
+router.get("/:id", ProductControllerHttpWrapper.getProduct)
+router.delete("/:id", ProductControllerHttpWrapper.deleteProduct)
+router.post("/upload", ProductControllerHttpWrapper.importProducts)
 
 export default router

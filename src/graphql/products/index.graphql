@@ -1,0 +1,9 @@
+type Query
+{
+    products: [Product]
+}
+
+type Mutation
+{
+    deleteProduct(id: String): Product
+}
