@@ -10,7 +10,7 @@ export default class ProductValidationService extends Validation {
     getProduct(data: { id: string }) {
 
         const schema = Joi.object({
-            id: Joi.string().required()
+            id: Joi.number().required()
         })
 
         this.validate(schema, data)
@@ -20,7 +20,7 @@ export default class ProductValidationService extends Validation {
     deleteProduct(data: { id: string }) {
 
         const schema = Joi.object({
-            id: Joi.string().required()
+            id: Joi.number().required()
         })
 
         this.validate(schema, data)

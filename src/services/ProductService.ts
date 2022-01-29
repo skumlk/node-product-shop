@@ -10,9 +10,9 @@ import { readCSV } from "../helpers/csv";
 import * as path from 'path';
 import { constants } from '../const/common';
 
-import UnauthorizedError from "../errors/UnauthorizedError";
 import * as ErrorCodes from "../errors/ErrorCodes"
 import BadRequestError from "../errors/BadRequestError";
+import NotFoundError from "../errors/NotFoundError";
 
 @Service()
 export default class ProductService {
@@ -30,13 +30,21 @@ export default class ProductService {
     async getProduct(productId: string) {
         const { id } = this.productValidationService.getProduct({ id: productId })  // Validates and transform data, throw errors if any     
         const product = await this.productModelService.get(id)
+
+        if (!product){
+            throw new NotFoundError("Product Not Found")
+        }
+
         return product;
     }
 
     async deleteProduct(productId: string) {
         const { id } = this.productValidationService.deleteProduct({ id: productId })  // Validates and transform data, throw errors if any     
-        const product = await this.productModelService.delete(id)
-        return product;
+        const { count } = await this.productModelService.delete(id)
+
+        if (count == 0){
+            throw new NotFoundError("Product Not Found")
+        }
     }
 
     async importProducts(files: FileArray | undefined) {

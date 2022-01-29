@@ -25,7 +25,7 @@ export default class ProductModelService
 
     async delete(id: number)
     {
-        return await prisma.product.delete({
+        return await prisma.product.deleteMany({
             where: { id }
         })
     }

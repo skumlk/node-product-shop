@@ -1,3 +1,3 @@
-export default class UnauthorizedError{
+export default class NotFoundError {
     constructor(public message: string){}
 }

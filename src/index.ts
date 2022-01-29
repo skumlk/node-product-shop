@@ -1,8 +1,11 @@
 import { config } from "./config/config"
 import startup from "./startup/index"
 import express from "express"
+import { Server } from "http"
 
+let server : Server
 const app = express()
+
 async function startServer() {
 
     console.log("Starting server...")
@@ -14,7 +17,7 @@ async function startServer() {
         return process.exit(1);
     }
 
-    app.listen(config.SERVER_PORT, () => {
+    server = app.listen(config.SERVER_PORT, () => {
         console.log("Server Started on port: ", config.SERVER_PORT)
     }).on("error", (err: any) => {
         console.log(err)
@@ -22,4 +25,4 @@ async function startServer() {
 }
 
 startServer()
-export default app
+export { app, server }

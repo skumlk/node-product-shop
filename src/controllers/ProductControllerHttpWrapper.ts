@@ -36,6 +36,8 @@ export default class ProductControllerHttpWrapper {
             const data = await ProductController.deleteProduct(id)
             return httpHelpers.successResponse(res, data)
         } catch (e) {
+            console.log(e)
+
             next(e)
         }
     }
