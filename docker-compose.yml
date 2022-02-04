@@ -15,7 +15,7 @@ services:
     volumes:
       - db-data:/var/lib/mysql
   eshop:
-    image: product-node:v2
+    image: product-node:v4
     depends_on:
       - mysqldb
       - migration
@@ -33,20 +33,20 @@ services:
     volumes:
       - .:/code
   migration:
-    image: product-node:v2
+    image: product-node:v4
     build: ./src
     env_file: .env
     environment:
       - DATABASE_URL=${DATABASE_URL}
-    command: .
+    command:
       prisma migrate reset --force --preview-feature  
       prisma migrate deploy --preview-feature
       ts-node prisma/seed.ts
     volumes:
-        - .:/code
+      - .:/code
     links:
-        - mysqldb
+      - mysqldb
     depends_on:
-        - mysqldb
+      - mysqldb
 volumes: 
   db-data:

@@ -4,6 +4,10 @@
 
 After docker instance started go to rest.http file, and you can run all the routes using this file using "vs code REST Client"
 
+To access graphql api go to 
+
+http://localhost:4000/graphql
+
 # To run unit tests
     run command: npm run test
 
