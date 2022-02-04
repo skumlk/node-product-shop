@@ -2,7 +2,7 @@
 # To run docker file
     run command: docker-compose up
 
-After docker instance started go to rest.http file, and you can run all the routes using this file using "vs code REST Client"
+After starting the docker instance open the rest.http file, and you can run all the routes using this file (using "vs code REST Client").
 
 To access graphql api go to 
 
