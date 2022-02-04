@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  mysqldb:
+    image: mysql:5.7
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    ports:
+      - 4401:3306
+    volumes:
+      - db-data:/var/lib/mysql
+  eshop:
+    image: product-node:v2
+    depends_on:
+      - mysqldb
+      - migration
+    command:
+      npm run start
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - SERVER_PORT=${SERVER_PORT}
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/code
+  migration:
+    image: product-node:v2
+    build: ./src
+    env_file: .env
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+    command: .
+      prisma migrate reset --force --preview-feature  
+      prisma migrate deploy --preview-feature
+      ts-node prisma/seed.ts
+    volumes:
+        - .:/code
+    links:
+        - mysqldb
+    depends_on:
+        - mysqldb
+volumes: 
+  db-data:

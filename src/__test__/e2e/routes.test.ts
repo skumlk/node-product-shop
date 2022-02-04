@@ -65,7 +65,7 @@ describe('Delete a product', () => {
 describe('Upload a CSV file', () => {
   it('should upload new products', async () => {
 
-      const filePath = `${__dirname}/../test_files/data.csv`;
+      const filePath = `${__dirname}/../test_data/data.csv`;
 
       let response = await request(app)
         .post('/api/products/upload')

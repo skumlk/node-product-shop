@@ -1,6 +1,3 @@
-
-import path from 'path';
-import dotenv from "dotenv"
 import * as _ from "lodash"
 
 const required_config_variables: any = {//Safe to use any in here!

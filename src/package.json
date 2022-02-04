@@ -3,14 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev-only": "dotenv -e config/.dev.env ts-node index.ts ",
+    "start": "ts-node index.ts ",
     "dev": "dotenv -e config/.dev.env nodemon index.ts",
-    "test-only": "dotenv -e config/.test.env jest",
+    "dev-only": "dotenv -e config/.dev.env ts-node index.ts ",
     "test": "dotenv -e config/.test.env prisma migrate reset --force --preview-feature && dotenv -e config/.test.env prisma migrate deploy --preview-feature && dotenv -e config/.test.env jest",
+    "test-only": "dotenv -e config/.test.env jest",
     "build": "dotenv -e config/.prod.env  tsc --project ./",
-    "migrate": "npx prisma migrate dev",
     "lint": "eslint **/*.ts",
-    "format": "eslint **/*.ts --fix"
+    "format": "eslint **/*.ts --fix",
+    "migrate": "npx prisma migrate dev",
+    "seed": "ts-node prisma/seed.ts"
   },
   "jest": {
     "testEnvironment": "node",
@@ -42,9 +44,6 @@
     "@prisma/client": "^3.8.1",
     "@types/cors": "^2.8.12",
     "@types/express-fileupload": "^1.2.2",
-    "@types/express-graphql": "^0.9.0",
-    "@types/express-rate-limit": "^6.0.0",
-    "@types/graphql": "^14.5.0",
     "@types/hpp": "^0.2.2",
     "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.10.1",
