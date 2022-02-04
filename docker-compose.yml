@@ -38,10 +38,9 @@ services:
     env_file: .env
     environment:
       - DATABASE_URL=${DATABASE_URL}
-    command:
-      prisma migrate reset --force --preview-feature  
-      prisma migrate deploy --preview-feature
-      ts-node prisma/seed.ts
+    command: 
+      prisma migrate reset --force --preview-feature 
+      prisma db seed
     volumes:
       - .:/code
     links:
